@@ -1,0 +1,937 @@
+/* ============================================================
+   GT ULTRA — LANDING PAGE CLONE
+   Design System & Styles
+   ============================================================ */
+
+/* ---------- Google Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* ---------- Custom Properties ---------- */
+:root {
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-grey-dark: #1a1a1a;
+  --color-grey-mid: #888888;
+  --color-grey-light: #cccccc;
+
+  --font-display: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --grid-columns: 6;
+  --grid-gap: 20px;
+  --page-padding: 20px;
+
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --grid-gap: 30px;
+    --page-padding: 30px;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --page-padding: 40px;
+  }
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto; /* GSAP handles smooth scrolling */
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-black);
+  color: var(--color-white);
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.1;
+}
+
+p {
+  line-height: 1.55;
+}
+
+/* ---------- Loader ---------- */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-black);
+  color: var(--color-white);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.loader-title {
+  font-family: var(--font-display);
+  font-size: 14vw;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-align: center;
+  padding: 0 var(--page-padding);
+  animation: loader-pulse 2s ease-in-out infinite;
+  font-weight: 900;
+}
+
+@media (min-width: 768px) {
+  .loader-title {
+    font-size: 12vw;
+  }
+}
+
+@media (min-width: 1100px) {
+  .loader-title {
+    font-size: 9vw;
+  }
+}
+
+@keyframes loader-pulse {
+  0%, 100% { opacity: 1; font-weight: 900; }
+  50% { opacity: 0.7; font-weight: 400; }
+}
+
+.loader-meta {
+  position: absolute;
+  bottom: 20px;
+  left: var(--page-padding);
+  right: var(--page-padding);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ---------- Navigation ---------- */
+nav.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px var(--page-padding);
+  mix-blend-mode: difference;
+  color: var(--color-white);
+  pointer-events: none;
+}
+
+nav.main-nav > * {
+  pointer-events: auto;
+}
+
+nav.main-nav h1 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+nav.main-nav .nav-links {
+  display: flex;
+  gap: 24px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+nav.main-nav .nav-links a {
+  transition: opacity var(--transition-fast);
+  cursor: pointer;
+}
+
+nav.main-nav .nav-links a:hover {
+  opacity: 0.6;
+}
+
+nav.main-nav .nav-links a span {
+  display: inline-block;
+  margin-left: 2px;
+}
+
+/* ---------- Grid System ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+  gap: var(--grid-gap);
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+  width: 100%;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Sections ---------- */
+.section-content {
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-bg-black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.section-bg-white {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+/* ---------- Typography ---------- */
+.h1-hero {
+  font-family: var(--font-display);
+  font-size: 16vw;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .h1-hero {
+    font-size: 14vw;
+  }
+}
+
+@media (min-width: 1100px) {
+  .h1-hero {
+    font-size: 10.5vw;
+  }
+}
+
+.h2-description {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 2.5vw, 28px);
+  line-height: 1.4;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.6;
+  font-weight: 400;
+  color: inherit;
+  opacity: 0.85;
+}
+
+.text-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+.text-sidebar {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.6;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+/* ---------- Spacing Utilities ---------- */
+.margin-top-s { margin-top: 3vh; }
+.margin-top-m { margin-top: 6vh; }
+.margin-top-l { margin-top: 10vh; }
+.margin-bottom-s { margin-bottom: 3vh; }
+.margin-bottom-m { margin-bottom: 6vh; }
+.margin-bottom-l { margin-bottom: 10vh; }
+.padding-top-s { padding-top: 3vh; }
+.padding-bottom-s { padding-bottom: 3vh; }
+.padding-bottom-m { padding-bottom: 6vh; }
+
+/* ---------- Layout: Text Alignment ---------- */
+.text-4of6-alignright {
+  grid-column: 1 / -1;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .text-4of6-alignright {
+    grid-column: 3 / 7;
+  }
+}
+
+/* ---------- Layout: Multi-column Text ---------- */
+.text-multicol {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 768px) {
+  .text-multicol {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Layout: Column with Sidebar ---------- */
+.column-with-sidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+}
+
+@media (min-width: 900px) {
+  .column-with-sidebar.sidebar-right {
+    grid-template-columns: 3fr 1.5fr;
+  }
+
+  .column-with-sidebar.sidebar-left {
+    grid-template-columns: 1.5fr 3fr;
+  }
+
+  .column-with-sidebar.sidebar-left .sidebar {
+    order: -1;
+  }
+}
+
+.sidebar-text-col {
+  position: sticky;
+  top: 120px;
+}
+
+/* ---------- Morphing / Specimen Sections ---------- */
+.morph-container {
+  width: 100%;
+  position: relative;
+}
+
+.morph-stations {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.morph-stations label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.morph-stations label.active {
+  opacity: 1;
+}
+
+.morph-word {
+  font-family: var(--font-display);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  transition: font-weight 0.1s linear;
+  overflow: hidden;
+}
+
+.morph-word-xl {
+  font-size: clamp(60px, 12vw, 160px);
+}
+
+.morph-word-xxl {
+  font-size: clamp(80px, 16vw, 220px);
+}
+
+.morph-word-xxxl {
+  font-size: clamp(100px, 20vw, 280px);
+}
+
+/* ---------- Weight Variants ---------- */
+.weight-100 { font-weight: 100; }
+.weight-200 { font-weight: 200; }
+.weight-300 { font-weight: 300; }
+.weight-400 { font-weight: 400; }
+.weight-500 { font-weight: 500; }
+.weight-600 { font-weight: 600; }
+.weight-700 { font-weight: 700; }
+.weight-800 { font-weight: 800; }
+.weight-900 { font-weight: 900; }
+
+/* ---------- Sans vs Serif Comparison ---------- */
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .comparison-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.comparison-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 8px 0;
+}
+
+.comparison-word {
+  font-size: clamp(50px, 10vw, 140px);
+  line-height: 1;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.comparison-word.sans-generic {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.comparison-word.serif-generic {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+}
+
+.comparison-word.gt-ultra {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+/* ---------- Design Space Animation ---------- */
+.design-space-anim {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--color-grey-dark);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.design-space-anim .axis-label {
+  position: absolute;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+.design-space-anim .axis-label.x-axis {
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.design-space-anim .axis-label.y-axis {
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.design-space-letter {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 15vw, 200px);
+  transition: font-weight 0.1s linear, font-style 0.3s ease;
+}
+
+/* ---------- Drawing Animation (Letter 'a') ---------- */
+.drawing-animation {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.drawing-letter {
+  font-family: var(--font-display);
+  font-size: clamp(200px, 35vw, 500px);
+  line-height: 1;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.drawing-letter-bg {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: clamp(200px, 35vw, 500px);
+  line-height: 1;
+  opacity: 0.05;
+}
+
+/* ---------- Family Overview ---------- */
+.family-overview {
+  width: 100%;
+}
+
+.family-overview-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px 0;
+  align-items: baseline;
+}
+
+@media (min-width: 768px) {
+  .family-overview-row {
+    grid-template-columns: 0.8fr 2fr 3fr;
+    gap: var(--grid-gap);
+  }
+}
+
+.family-overview-row .weight-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  margin-bottom: 5px;
+}
+
+.family-overview-row .sample-large {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.family-overview-row .sample-small {
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.2vw, 16px);
+  line-height: 1.5;
+  letter-spacing: 0;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .family-overview-row .sample-small {
+    display: block;
+  }
+}
+
+.family-overview-row .text-uppercase {
+  text-transform: uppercase;
+}
+
+.family-overview-row .text-italic {
+  font-style: italic;
+}
+
+/* Section-specific white bg row border */
+.section-bg-white .family-overview-row {
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Full Family Specimen ---------- */
+.full-family-specimen {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .full-family-specimen {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.subfamily-column {
+  padding: 0 10px;
+}
+
+.subfamily-column .subfamily-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+
+.subfamily-column .weight-sample {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 56px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 5px;
+}
+
+/* ---------- Character Set ---------- */
+.character-set-container {
+  width: 100%;
+}
+
+.character-set-container h5 {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 15px;
+  margin-top: 30px;
+  opacity: 0.6;
+}
+
+.character-set-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 2px;
+}
+
+.char-box {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 28px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.char-box:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  transform: scale(1.05);
+}
+
+.char-zoomed {
+  font-family: var(--font-display);
+  font-size: clamp(80px, 12vw, 160px);
+  text-align: center;
+  padding: 40px 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* ---------- Credits Section ---------- */
+.credits-block {
+  margin-bottom: 30px;
+}
+
+.credits-block h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.credits-block p {
+  max-width: 600px;
+}
+
+.credits-block a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity var(--transition-fast);
+}
+
+.credits-block a:hover {
+  opacity: 0.6;
+}
+
+/* ---------- Minisite Links ---------- */
+.minisite-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+  .minisite-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .minisite-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.minisite-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.5vw, 20px);
+  letter-spacing: -0.01em;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.minisite-link-item:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+/* ---------- Scroll-triggered Animation States ---------- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.reveal-fade {
+  opacity: 0;
+}
+
+/* ---------- Pinned Section ---------- */
+.pin-section {
+  position: relative;
+}
+
+/* ---------- Decorative / Geometric Elements ---------- */
+.geo-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.geo-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  opacity: 0.06;
+}
+
+.geo-line {
+  position: absolute;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.06;
+  transform-origin: left center;
+}
+
+/* ---------- Scroll Progress Indicator ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--color-white);
+  mix-blend-mode: difference;
+  z-index: 10000;
+  transform-origin: left;
+  transform: scaleX(0);
+  width: 100%;
+}
+
+/* ---------- Section Divider ---------- */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.15;
+}
+
+/* ---------- Axis Animation Containers ---------- */
+.axis-demo {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.axis-demo-words {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.axis-demo-word {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 120px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 0;
+  transition: font-weight 0.15s ease;
+}
+
+.section-bg-white .axis-demo-word {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Calligraphy Morph ---------- */
+.calligraphy-morph {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 14vw, 200px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-align: center;
+  will-change: font-weight, font-style;
+}
+
+/* ---------- Interactive contrast demo ---------- */
+.contrast-demo-container {
+  position: relative;
+  cursor: crosshair;
+}
+
+.contrast-label {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}
+
+/* ---------- Responsive Visibility ---------- */
+.show-desktop { display: none; }
+.show-mobile { display: block; }
+
+@media (min-width: 900px) {
+  .show-desktop { display: block; }
+  .show-mobile { display: none; }
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: inherit;
+}
+
+.section-bg-white ::selection {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Smooth letter 'a' SVG animation ---------- */
+.svg-letter-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 0;
+}
+
+.svg-letter-container svg {
+  width: 60%;
+  max-width: 600px;
+  height: auto;
+}
+
+.svg-letter-container svg path {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
+/* ---------- Geometric construction SVG ---------- */
+.geo-construction {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 0;
+  position: relative;
+}
+
+.geo-construction svg {
+  width: 80%;
+  max-width: 800px;
+}
+
+/* ---------- Custom scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-grey-mid);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-light);
+}
