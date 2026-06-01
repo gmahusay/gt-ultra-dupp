@@ -105,9 +105,10 @@ function initHeroAnimations() {
     }
   );
 
-  // Parallax on hero title during scroll
+  // Parallax and scale on hero title during scroll
   gsap.to(heroTitle, {
     yPercent: -30,
+    scale: 0.5,
     ease: 'none',
     scrollTrigger: {
       trigger: '#intro',
