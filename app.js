@@ -1,5 +1,5 @@
 /* ============================================================
-   GT ULTRA — LANDING PAGE CLONE
+   RC ULTRA — LANDING PAGE CLONE
    GSAP ScrollTrigger Animations
    ============================================================ */
 
@@ -175,7 +175,7 @@ function initComparisonAnimations() {
     }
   );
 
-  // Animate font-weight on scroll for GT Ultra comparison words
+  // Animate font-weight on scroll for RC Ultra comparison words
   const gtWords = section.querySelectorAll('.comparison-word.gt-ultra');
   gtWords.forEach(word => {
     gsap.fromTo(word,
