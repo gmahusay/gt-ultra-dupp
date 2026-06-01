@@ -107,16 +107,22 @@ function initHeroAnimations() {
 
   // Parallax and scale on hero title wrapper during scroll
   const heroWrapper = document.getElementById('hero-title-wrapper');
-  if (heroWrapper) {
+  const heroTitleElement = document.getElementById('hero-title');
+  if (heroWrapper && heroTitleElement) {
     gsap.to(heroWrapper, {
       yPercent: -30,
-      scale: 0.5,
+      scale: () => {
+        // Calculate the scale needed to make the title visually ~16px
+        const computedFontSize = parseFloat(window.getComputedStyle(heroTitleElement).fontSize) || 120;
+        return 16 / computedFontSize;
+      },
       ease: 'none',
       scrollTrigger: {
         trigger: '#intro',
         start: 'top top',
         end: 'bottom top',
-        scrub: true
+        scrub: true,
+        invalidateOnRefresh: true
       }
     });
   }
