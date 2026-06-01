@@ -105,18 +105,21 @@ function initHeroAnimations() {
     }
   );
 
-  // Parallax and scale on hero title during scroll
-  gsap.to(heroTitle, {
-    yPercent: -30,
-    scale: 0.5,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#intro',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
+  // Parallax and scale on hero title wrapper during scroll
+  const heroWrapper = document.getElementById('hero-title-wrapper');
+  if (heroWrapper) {
+    gsap.to(heroWrapper, {
+      yPercent: -30,
+      scale: 0.5,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#intro',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
 
   // Intro description
   const introDesc = document.getElementById('intro-desc');
